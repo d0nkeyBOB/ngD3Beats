@@ -10,69 +10,80 @@ import * as d3 from 'd3';
 })
 export class GridComponent implements OnInit {
   @ViewChild('grid') private gridContainer: ElementRef;
+  
   private margin: any = { top: 20, bottom: 20, left: 20, right: 20};	  
   private grid: any;
-  private width: number;
-  private height: number;
+  private width: number = window.innerWidth;
+  private height: number = window.innerHeight;
+  private radius: number = 50;
+  private colors: any;
 
   constructor() { }
 
   ngOnInit() {
-    this.drawGrid();
+    this.drawField();
   }
 
-  drawGrid() {
+  drawField() {
     const element = this.gridContainer.nativeElement;
 
+    var circleAttrs = {
+        w: this.width,
+        h: this.height,
+        r: 50
+    };
+
+    var circles = d3.range(1).map(function() {
+      return {
+        x: Math.round(Math.random() * (circleAttrs.w - circleAttrs.r * 2) + circleAttrs.r),
+        y: Math.round(Math.random() * (circleAttrs.h - circleAttrs.r * 2) + circleAttrs.r)
+      };
+    });
+
+    this.colors = d3.scaleOrdinal()
+      .range(d3.schemeCategory10);
+
     const grid = d3.select(element).append('svg')	      
-      .attr('width', (window.screen.width) + "px")	      
-      .attr('height', '202px');
+      .attr('width', this.width)	      
+      .attr('height', this.height)
+      .attr('class', 'field')
+      .call(d3.drag()
+        .container(this)
+        .subject(dragsubject)
+        .on("start", dragstarted)
+        .on("drag", dragged)
+        .on("end", dragended));
 
-    var row = grid.selectAll(".row")
-      .data(this.dridData)
-      .enter().append("g")
-      .attr("class", "row");
+    var circle = grid.selectAll("circle")
+        .data(circles)
+        .enter().append("circle")
+          .attr("cx", function(d) { return d.x; })
+          .attr("cy", function(d) { return d.y; })
+          .attr("r", circleAttrs.r)
+          .style('fill', (d, i) => this.colors(i));
 
-    var column = row.selectAll(".square")
-      .data(function(d: any) { return d; })
-      .enter().append("rect")
-      .attr("class", "square")
-      .attr("x", (d: any) => { return d.x; })
-      .attr("y", (d: any) => { return d.y; })
-      .attr("width", (d: any) => { return d.width; })
-	    .attr("height", (d: any) => { return d.height; })
-      .style("fill", "#fff")
-      .style("stroke", "#000")
-      .on('click', () => console.log("clicked"))
 
   }
 
-  dridData() {
-    var data = new Array();
-    var xpos = 1;
-    var ypos = 1;
-    var width = 50;
-    var height = 50;
-
-    for (let row = 0; row < 5; row++) {
-      data.push(new Array());
-      
-      for (let column  = 0; column  < 16; column ++) {
-        data[row].push({
-          x: xpos,
-          y: ypos,
-          width: width,
-          height: height
-        })
-        xpos += width;
-      }
-
-      xpos = 1
-      ypos += height;
-    }
-
-    return data;
-
+  dragsubject() {
+    return simulation.find(d3.event.x, d3.event.y, this.radius);
+  }
+  
+  dragstarted() {
+    if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+    d3.event.subject.fx = d3.event.subject.x;
+    d3.event.subject.fy = d3.event.subject.y;
+  }
+  
+  dragged() {
+    d3.event.subject.fx = d3.event.x;
+    d3.event.subject.fy = d3.event.y;
+  }
+  
+  dragended() {
+    if (!d3.event.active) simulation.alphaTarget(0);
+    d3.event.subject.fx = null;
+    d3.event.subject.fy = null;
   }
 
 }
