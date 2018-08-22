@@ -1,0 +1,352 @@
+@import 'variable';
+@import '~se-desktop-framework/src/style'; // import framework style
+//@import '../desktop-framework/src/style'; // import framework style
+
+//@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+// add your global classes here
+
+// Body
+//
+// body, html {
+// 	font-family: 'Open Sans', sans-serif;
+// }
+// margin: 0px;
+//     background-color: rgba(128, 128, 128, 0.43);
+//     width: 140px;
+//     text-align: right;
+//     padding-right: 10px;
+
+.list-group-item.selected{
+  z-index: 2;
+  border-left: #3DCD58 6px solid !important;
+  padding-left: 9px;
+}
+
+div.btn, button.btn {
+    min-width: auto;
+}
+
+//nw-flex related issue
+.tab-bar-flex{
+  padding-right: 4px;
+}
+// Dashboard
+
+.db-header {
+	margin-top: 70px;
+    overflow: hidden;
+    height: 50px;
+}
+
+.db-header h3 {
+	font-size: 24px;
+	color: #626469;
+	margin: 0;
+}
+
+.db-footer {
+    padding: 30px 0 0 0;
+}
+
+.flex-container.vertical {
+    margin: auto auto !important;
+}
+
+.flex-container.horizontal > div, .flex-container.vertical > div {
+   margin: 0 0;
+}
+
+.flex-container.vertical > div:first-child {
+    margin-top: 0;
+}
+
+.flex-container.horizontal > div:last-child {
+   margin-right: 0;
+}
+
+.flex-box.row {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: flex-start;
+    justify-content: flex-start;
+-webkit-align-content: flex-start;
+    -ms-flex-line-pack: start;
+    align-content: flex-start;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.flex-box.column {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-align-content: center;
+    -ms-flex-line-pack: center;
+    align-content: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.card {
+	background: #FFFFFF;
+	box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.50);
+	width: 200px;
+	height: 200px;
+	font-family: OpenSans;
+	color: #626469;
+	margin: 10px 25px;
+	-webkit-order: 0;
+	-ms-flex-order: 0;
+	order: 0;
+	-webkit-flex: 0 1 auto;
+	-ms-flex: 0 1 auto;
+	flex: 0 1 auto;
+	-webkit-align-self: auto;
+	-ms-flex-item-align: auto;
+	align-self: auto;
+}
+
+.card img {
+}
+
+.card .wrapper {
+	padding: 5px;
+	line-height: 12px;
+}
+
+.card .title {
+	font-size: 14px;
+}
+
+.card .subtitle {
+	font-size: 11px;
+}
+.card .date {
+	font-size: 10px;
+}
+
+
+// Project
+
+    // nav
+
+.inner-nav {
+	width: 270px;
+	/* Rectangle 12: */
+	background: #FFFFFF;
+	box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.50);
+       display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-align-content: flex-start;
+    -ms-flex-line-pack: start;
+    align-content: flex-start;
+	-webkit-align-items: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+}
+
+
+.nav-top-tenants {
+    /* Rectangle 202: */
+    background: #3DCD58;
+	/* Solar Data Center: */
+	color: #FFFFFF;
+}
+
+.nav-top-tenants .fa {
+	color: #FFFFFF;
+    line-height: 34px;
+}
+
+.nav-top-tenants h4 {
+	font-size: 24px;
+	font-weight: normal;
+}
+
+.nav-top-tenants .nav-select {
+	padding-left: 0;
+	width: 91.66667%;
+	position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+	float: left;
+}
+
+.nav-menu ul, .nav-menu li {
+    list-style: none;
+}
+.nav-menu ul {
+    padding: 12px 0px;
+}
+
+.nav-menu ul li {
+    padding: 12px 0;
+    font-size: 14px;
+    border-bottom: 1px solid #E6E6E6;
+}
+.nav-menu div > ul > li {
+    border-bottom: 1px solid #E6E6E6;
+}
+
+.nav-menu ul li a {
+    padding: 25px;
+    color: #626469;
+}
+
+.nav-menu ul li ul li {
+    font-size: 12px;
+    border-bottom: none;
+}
+
+.nav-menu ul li ul li a {
+    padding-left: 35px;
+}
+
+.nav-menu ul li ul li.active {
+    border-left: 10px solid #009530;
+}
+
+.nav-menu ul li ul li.active a {
+    color: #009530;
+    padding-left: 25px;
+}
+
+.nav-menu ul li ul li.active a {
+    color: #009530;
+    padding-left: 25px;
+}
+
+.inner-content .header {
+	/* Rectangle 193: */
+	background: #3DCD58;
+	height: 53px;
+    overflow: hidden;
+}
+
+.inner-content .header h4 {
+	color: #FFFFFF;
+	font-size: 24px;
+	font-weight: normal;
+    padding: 0px;
+    margin: 0px;
+}
+
+/* Tables */
+
+table {
+    border: none;
+}
+
+table thead {
+   background-color: #E6E6E6;
+}
+
+table thead th {
+    border: #E6E6E6;
+}
+
+table tbody {
+    background-color: #FFFFFF;
+}
+
+table tbody td {
+    border: 1px solid #E6E6E6;
+}
+
+table .series-actions {
+    width: 70px;
+}
+
+// Various
+
+.fa {
+	color: #626469;
+}
+
+/* Entries */
+
+.filter-nav {
+    width: 270px;
+    background-color: #ffffff;
+}
+
+
+.filter-header {
+    height: 40px;
+}
+
+.filter-header > h4 {
+    font-size: 18px;
+    color: #626469;
+}
+
+.filter-nav form .row {
+    padding: 8px 0;
+}
+
+.filter-nav form .control-label {
+    text-align: right;
+    line-height: 30px;
+}
+
+.filter-nav .col-md-2, .filter-nav .col-md-3, .filter-nav .col-md-4, .filter-nav .col-md-8, .filter-nav .col-md-9 {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.filter-nav-reset {
+   text-align: right;
+}
+
+.value-filter .col-xs-4, .value-filter .col-xs-2 {
+    padding-left: 0px;
+}
+
+.fill-space {
+    display: block;
+}
+
+
+.list-group.no-border {
+  li {
+    border-left: none;
+    border-right: none;
+
+    &:first-child{
+      border-top: none;
+    }
+    &:last-child{
+      border-bottom: none;
+    }
+  }
+}

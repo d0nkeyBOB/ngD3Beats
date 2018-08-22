@@ -1,0 +1,34 @@
+<div class="page-content inner-shadow-top has-scroll" style="padding-bottom: 50px;">
+  <div class="container center-block">
+    <div class="db-header">
+      <h3 class="pull-left">Projects</h3>
+      <button type="button" class="btn btn-primary pull-right" ng-click="vm.add()">Add</button>
+    </div>
+    <div class="flex-box row">
+      <div class="card" ng-repeat="project in vm.projects track by project._id">
+        <div style="overflow: hidden">
+          <img src="http://placehold.it/200x90">
+        </div>
+        <div class="wrapper">
+          <p class="title">{{ project.name }}</p>
+          <p class="subtitle">{{ project.location }}</p>
+          <p class="date">{{ project._kmd.lmt | date:'MMM EEEE, yyyy' }}</p>
+          <button type="button" class="btn btn-primary pull-right" ng-click="vm.openProject(project)">View</button>
+          <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="vm.delete(project._id)">
+            <span class="fa fa-trash-o" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="db-footer">
+      <div class="btn-group pull-right" role="group">
+        <button type="button" class="btn btn-default" aria-label="Left Align">
+          <span class="fa fa-th-large" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="btn btn-default" aria-label="Left Align">
+          <span class="fa fa-th-list" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
