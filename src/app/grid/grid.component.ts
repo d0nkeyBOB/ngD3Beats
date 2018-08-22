@@ -1,5 +1,6 @@
 import { Component, OnInit, OnChanges, ViewChild, ElementRef, Input, ViewEncapsulation } from '@angular/core';	
 import * as d3 from 'd3';
+import { Tone, Volume, Synth } from "tone";
 
 @Component({
   selector: 'app-grid',
@@ -26,11 +27,20 @@ export class GridComponent implements OnInit {
 
   drawField() {
     const element = this.gridContainer.nativeElement;
+    const audioContext: AudioContext = new (window["AudioContext"] || window["webkitAudioContext"])();
+    const destination = audioContext.destination;
+    const gain = audioContext.createGain();
+    gain.gain.value = 1.0;
+    gain.connect(destination);
+
+    const oscillator = audioContext.createOscillator();
+    oscillator.type = 'sawtooth';
+    oscillator.frequency.value = 440;
 
     var circleAttrs = {
-        w: this.width,
-        h: this.height,
-        r: 50
+        w: 800,
+        h: 600,
+        r: 25
     };
 
     var circles = d3.range(1).map(function() {
@@ -47,43 +57,35 @@ export class GridComponent implements OnInit {
       .attr('width', this.width)	      
       .attr('height', this.height)
       .attr('class', 'field')
-      .call(d3.drag()
-        .container(this)
-        .subject(dragsubject)
-        .on("start", dragstarted)
-        .on("drag", dragged)
-        .on("end", dragended));
 
     var circle = grid.selectAll("circle")
         .data(circles)
         .enter().append("circle")
-          .attr("cx", function(d) { return d.x; })
-          .attr("cy", function(d) { return d.y; })
-          .attr("r", circleAttrs.r)
-          .style('fill', (d, i) => this.colors(i));
-
-
+        .attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; })
+        .attr("r", circleAttrs.r)
+        .style('fill', (d, i) => this.colors(i))
+        .on("click", () => {
+          oscillator.start();
+        })
+        .on("mouseout", () => {
+          oscillator.stop();
+        });
   }
 
-  dragsubject() {
-    return simulation.find(d3.event.x, d3.event.y, this.radius);
+  initDrag(d: any) {
+    d3.drag()
   }
+
+  // dragstarted(d) {
+  //   d3.select(this).raise().classed("active", true);
+  // }
   
-  dragstarted() {
-    if (!d3.event.active) simulation.alphaTarget(0.3).restart();
-    d3.event.subject.fx = d3.event.subject.x;
-    d3.event.subject.fy = d3.event.subject.y;
-  }
+  // dragged(d) {
+  //   d3.select(this).attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
+  // }
   
-  dragged() {
-    d3.event.subject.fx = d3.event.x;
-    d3.event.subject.fy = d3.event.y;
-  }
-  
-  dragended() {
-    if (!d3.event.active) simulation.alphaTarget(0);
-    d3.event.subject.fx = null;
-    d3.event.subject.fy = null;
-  }
-
+  // dragended(d) {
+  //   d3.select(this).classed("active", false);
+  // }
 }
